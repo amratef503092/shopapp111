@@ -18,8 +18,14 @@ void main() async{
   late  Widget screen;
 bool? z= CacheHelper.getBoolean(key: 'onbording') ;
 print(z);
+  String? token = CacheHelper.getDataString(key: 'token');
+  print(token);
   if(z!){
-    screen  = const LoginScreen();
+    if(token!=null) {
+      screen = const HomeScreen();
+    }else{
+      screen = LoginScreen();
+    }
   }else{
     screen = OnBoardingScreen();
   }
@@ -29,7 +35,6 @@ print(z);
 }
 
 class MyApp extends StatelessWidget {
-   // ignore: use_key_in_widget_constructors
     MyApp({ required  this.screen});
    Widget screen;
 
@@ -40,11 +45,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BlocProvider(create: (BuildContext context) {
+      home: BlocProvider(create: (context) {
         return AppCubit();
       },
         child: screen ,

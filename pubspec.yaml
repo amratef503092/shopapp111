@@ -39,6 +39,11 @@ dependencies:
   dio: ^4.0.1
   shared_preferences: ^2.0.8
   smooth_page_indicator: ^1.0.0+2
+  form_field_validator: ^1.1.0
+  intl_phone_field: ^2.1.0
+  intl_phone_number_input: ^0.7.0+2
+  loading_indicator: ^3.0.2
+  fluttertoast: ^8.0.8
 
 dev_dependencies:
   flutter_test:
