@@ -6,8 +6,10 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:shopapp111/Constant/constants.dart';
 import 'package:shopapp111/Constant/validate.dart';
+import 'package:shopapp111/layout/home.dart';
 import 'package:shopapp111/shared/bloc/appstates.dart';
 import 'package:shopapp111/shared/bloc/bloc.dart';
+import 'package:shopapp111/shared/shared_prefrance.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -38,7 +40,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocProvider(
       create: (_)=>AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+
+          if(state is RegisterSuccessState){
+            token = AppCubit.get(context).registerModel.data.token;
+            CacheHelper.saveData(key: 'token', value: AppCubit.get(context).registerModel.data.token);
+            navigatorPush(context , const HomeScreen());
+            print(token);
+          }
+        },
         builder: (context, state) {
           var cubit = AppCubit.get(context);
 
@@ -65,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       const Text(
-                        "welcome in Fucking social App",
+                        "welcome in My App",
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -204,9 +214,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   )
                     ,
-                      MaterialButton(
+                      (state is !RegisterLoadingState) ? MaterialButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
+                              AppCubit.get(context).register(name: nameController.text, password: confirmPassController.text, email: emailController.text, phone: phoneController.text);
+                              if(state is RegisterSuccessState){
+                                token = AppCubit.get(context).registerModel.data.token;
+                                CacheHelper.saveData(key: 'token', value: AppCubit.get(context).registerModel.data.token);
+                                navigatorPush(context , const HomeScreen());
+                                print(token);
+                              }
                               print("خف عظمة ");
                             }
                           },
@@ -222,7 +239,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           minWidth: double.infinity,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)))
+                              borderRadius: BorderRadius.circular(20))) : Center( child: CircularProgressIndicator(),
+
+                      ),
                     ],
                   ),
                   key: formKey,

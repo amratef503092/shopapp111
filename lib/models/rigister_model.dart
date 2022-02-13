@@ -4,9 +4,9 @@ class RegisterModel {
     required this.message,
     required this.data,
   });
-  late final bool status;
-  late final String message;
-  late final Data data;
+   late final bool status;
+   late final String message;
+   late final Data data;
 
   RegisterModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
@@ -14,13 +14,7 @@ class RegisterModel {
     data = Data.fromJson(json['data']);
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['status'] = status;
-    _data['message'] = message;
-    _data['data'] = data.toJson();
-    return _data;
-  }
+
 }
 
 class Data {
@@ -48,14 +42,5 @@ class Data {
     token = json['token'];
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['name'] = name;
-    _data['email'] = email;
-    _data['phone'] = phone;
-    _data['id'] = id;
-    _data['image'] = image;
-    _data['token'] = token;
-    return _data;
-  }
+
 }

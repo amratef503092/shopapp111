@@ -44,6 +44,7 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   loading_indicator: ^3.0.2
   fluttertoast: ^8.0.8
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:

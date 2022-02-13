@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp111/shared/bloc/appstates.dart';
 import 'package:shopapp111/shared/bloc/bloc.dart';
 import 'package:shopapp111/shared/bloc/bloc_ob_server.dart';
 import 'package:shopapp111/shared/remote/api.dart';
@@ -20,7 +21,7 @@ bool? z= CacheHelper.getBoolean(key: 'onbording') ;
 print(z);
   String? token = CacheHelper.getDataString(key: 'token');
   print(token);
-  if(z!){
+  if(z!=null){
     if(token!=null) {
       screen = const HomeScreen();
     }else{
@@ -42,18 +43,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: BlocProvider(create: (context) {
-        return AppCubit();
-      },
-        child: screen ,
+    return MultiBlocProvider(
+      providers: [
+      BlocProvider(create: (_)=>AppCubit())
+      ],
+      child: BlocConsumer<AppCubit,AppStates>(
+        listener: (context, state) {
 
-      ),
+        },builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: screen,
+          );
+        },
+      )
     );
   }
 }

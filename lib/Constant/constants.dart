@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String ? token ;
+String  token = "" ;
 void navigatorPush(ctx , Widget screen){
   Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => screen
   ));

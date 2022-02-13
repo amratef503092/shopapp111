@@ -13,7 +13,7 @@ class DioHelper {
   }
 
   static Future<Response> getData(
-      {required String url, required Map<String, dynamic> query , String lang = 'en' ,String?token}) {
+      {required String url,  Map<String, dynamic> ? query , String lang = 'en' ,String?token}) {
     dio.options.headers = {
       'lang' : lang,
       'Authorization' : token,
@@ -24,7 +24,7 @@ class DioHelper {
     );
   }
   static Future<Response> postData(
-      {required String url, required Map<String, dynamic> query , String lang = 'en' ,String?token}) {
+      {required String url,  Map<String, dynamic> ?query , String lang = 'en' ,String?token}) {
     dio.options.headers = {
       'lang' : lang,
       'Authorization' : token,

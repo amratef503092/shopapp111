@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const Text(
-                    "welcome in Fucking social App",
+                    "welcome in my App",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -115,6 +115,7 @@ class LoginScreen extends StatelessWidget {
                     if(formKey.currentState!.validate()){
                       cubit.login(email: emailController.text, password: passController.text);
                       navigatorPush(context , HomeScreen());
+
                     }
 
                   },height: 50,elevation: 10,color: Colors.blueAccent,child: const Text(
